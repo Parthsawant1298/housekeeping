@@ -33,15 +33,15 @@ export default function Header() {
             Home
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link href="/about" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
+          <Link href="/About" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
             About Us
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link href="/faq" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
-            Resources
+          <Link href="/Faq" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
+            Faq
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link href="/contact" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
+          <Link href="/Contact" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
             Contact Us
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
@@ -76,9 +76,9 @@ export default function Header() {
           >
             <nav className="flex flex-col items-center py-4 space-y-4">
               <Link href="/" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>About Us</Link>
-              <Link href="/faq" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Resources</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Contact Us</Link>
+              <Link href="/About" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>About Us</Link>
+              <Link href="/Faq" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Faq</Link>
+              <Link href="/Contact" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Contact Us</Link>
               <Link href="/sign-in" 
                 className="w-full max-w-xs bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full text-center transition-all duration-300 font-medium shadow-md"
                 onClick={closeMenu}
