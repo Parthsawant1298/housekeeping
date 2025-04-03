@@ -79,7 +79,7 @@ export default function Header() {
               <Link href="/About" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>About Us</Link>
               <Link href="/Faq" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Faq</Link>
               <Link href="/Contact" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Contact Us</Link>
-              <Link href="/sign-in" 
+              <Link href="/Login" 
                 className="w-full max-w-xs bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full text-center transition-all duration-300 font-medium shadow-md"
                 onClick={closeMenu}
               >
