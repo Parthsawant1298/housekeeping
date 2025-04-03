@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -49,68 +49,6 @@ export default function LoginPage() {
     });
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-    const [isGoogleLoading, setIsGoogleLoading] = useState(true);
-
-    useEffect(() => {
-        const loadGoogleScript = () => {
-            const script = document.createElement('script');
-            script.src = 'https://accounts.google.com/gsi/client';
-            script.async = true;
-            script.defer = true;
-            script.onload = initializeGoogleSignIn;
-            document.body.appendChild(script);
-        };
-
-        loadGoogleScript();
-    }, []);
-
-    const initializeGoogleSignIn = () => {
-        if (window.google) {
-            window.google.accounts.id.initialize({
-                client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-                callback: handleGoogleSignIn,
-            });
-            window.google.accounts.id.renderButton(
-                document.getElementById('googleSignInDiv'),
-                { theme: 'outline', size: 'large', width: '100%' }
-            );
-            setIsGoogleLoading(false);
-        }
-    };
-
-    const handleGoogleSignIn = async (response) => {
-        try {
-            const credential = response.credential;
-            const payload = JSON.parse(atob(credential.split('.')[1]));
-            
-            // Ensure we get a valid picture URL
-            const pictureUrl = payload.picture?.replace('=s96-c', '=s100-c');
-            
-            localStorage.setItem('googleCredential', JSON.stringify({
-                email: payload.email,
-                name: payload.name,
-                picture: pictureUrl
-            }));
-            const result = await fetch('/api/auth/google', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    token: credential,
-                }),
-            });
-    
-            if (result.ok) {
-                router.push('/Main');
-            } else {
-                throw new Error('Failed to sign in with Google');
-            }
-        } catch (error) {
-            setErrors({ google: 'Failed to sign in with Google' });
-            localStorage.removeItem('googleCredential'); // Clean up if auth fails
-        }
-    };
 
     const validateForm = () => {
         const newErrors = {};
@@ -231,20 +169,6 @@ export default function LoginPage() {
                                 <Button type="submit" disabled={isLoading}>
                                     {isLoading ? 'Signing in...' : 'Sign In'}
                                 </Button>
-
-                                <div className="relative my-6">
-                                    <div className="absolute inset-0 flex items-center">
-                                        <div className="w-full border-t border-gray-300"></div>
-                                    </div>
-                                    <div className="relative flex justify-center text-sm">
-                                        <span className="px-3 bg-white text-gray-500">Or continue with</span>
-                                    </div>
-                                </div>
-
-                                <div id="googleSignInDiv" className="w-full h-10 flex justify-center"></div>
-                                {errors.google && (
-                                    <p className="mt-1 text-sm text-red-500 text-center">{errors.google}</p>
-                                )}
 
                                 {errors.submit && (
                                     <div className="p-3 bg-red-50 text-red-700 text-sm rounded-md">
