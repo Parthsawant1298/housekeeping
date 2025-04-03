@@ -49,7 +49,7 @@ export default function Header() {
         
         {/* Right side buttons */}
         <div className="hidden md:flex items-center">
-          <Link href="/sign-in"
+          <Link href="/Login"
             className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-full font-medium shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
           >
             Sign In
@@ -83,7 +83,7 @@ export default function Header() {
                 className="w-full max-w-xs bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full text-center transition-all duration-300 font-medium shadow-md"
                 onClick={closeMenu}
               >
-                Sign In
+                Login
               </Link>
             </nav>
           </motion.div>

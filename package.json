@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "framer-motion": "^12.6.3",
+    "google-auth-library": "^9.15.1",
     "lucide-react": "^0.487.0",
+    "mongoose": "^8.13.1",
     "next": "15.2.4",
+    "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
