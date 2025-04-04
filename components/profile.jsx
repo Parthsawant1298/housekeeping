@@ -138,7 +138,7 @@ const ProfilePage = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-3xl mx-auto">
             <button 
-              onClick={() => router.push('/Main')}
+              onClick={() => router.push('/main')}
               className="mb-6 flex items-center text-teal-600 hover:text-teal-800 transition-colors"
             >
               <ArrowLeft size={18} className="mr-1" />

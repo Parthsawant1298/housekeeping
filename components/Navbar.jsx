@@ -10,6 +10,7 @@ export default function Navbar() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [user, setUser] = useState(null)
+  const [cartItemCount, setCartItemCount] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
   const profileMenuRef = useRef(null)
@@ -23,6 +24,8 @@ export default function Navbar() {
         if (response.ok) {
           const data = await response.json()
           setUser(data.user)
+          // Fetch cart once user is authenticated
+          fetchCartItemCount()
         }
       } catch (error) {
         console.error('Auth check failed:', error)
@@ -33,6 +36,28 @@ export default function Navbar() {
     
     checkAuth()
   }, [])
+  
+  // Function to fetch cart item count
+  const fetchCartItemCount = async () => {
+    try {
+      const response = await fetch('/api/cart')
+      if (response.ok) {
+        const data = await response.json()
+        
+        // Calculate total number of items (considering quantities)
+        let totalItems = 0
+        if (data.cart && data.cart.items) {
+          data.cart.items.forEach(item => {
+            totalItems += item.quantity
+          })
+        }
+        
+        setCartItemCount(totalItems)
+      }
+    } catch (error) {
+      console.error('Fetch cart count failed:', error)
+    }
+  }
   
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,7 +102,7 @@ export default function Navbar() {
         
         {/* Main navigation */}
         <nav className="hidden md:flex items-center space-x-10 mx-auto">
-          <Link href="/" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
+          <Link href="/main" className="text-gray-700 hover:text-teal-500 transition-colors py-2 relative group">
             Home
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
           </Link>
@@ -93,7 +118,11 @@ export default function Navbar() {
             <>
               <Link href="/cart" className="text-gray-700 hover:text-teal-500 relative transition-colors">
                 <ShoppingCart size={24} />
-                <span className="absolute -top-2 -right-2 bg-teal-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-teal-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemCount > 99 ? '99+' : cartItemCount}
+                  </span>
+                )}
               </Link>
               
               <div className="relative" ref={profileMenuRef}>
@@ -167,7 +196,7 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
           >
             <nav className="flex flex-col items-center py-4 space-y-4">
-              <Link href="/" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Home</Link>
+              <Link href="/main" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Home</Link>
               <Link href="/products" className="text-gray-700 hover:text-teal-500 transition-colors" onClick={closeMenu}>Products</Link>
               
               {user && (
@@ -196,6 +225,11 @@ export default function Navbar() {
                   >
                     <ShoppingCart size={16} className="mr-2" />
                     My Cart
+                    {cartItemCount > 0 && (
+                      <span className="ml-2 bg-white text-teal-600 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {cartItemCount > 99 ? '99+' : cartItemCount}
+                      </span>
+                    )}
                   </Link>
                   
                   <Link href="/profile" 

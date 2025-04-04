@@ -88,7 +88,7 @@ export default function LoginPage() {
                 throw new Error(data.error || 'Login failed');
             }
 
-            router.push('/Main');
+            router.push('/main');
         } catch (error) {
             setErrors(prev => ({
                 ...prev,
