@@ -43,7 +43,22 @@ const ProfilePage = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Validate file size (limit to 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size should not exceed 5MB');
+        return;
+      }
+      
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setError('Only image files are allowed');
+        return;
+      }
+      
+      setError(''); // Clear previous errors
       setProfileImage(file);
+      
+      // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
@@ -79,6 +94,12 @@ const ProfilePage = () => {
         ...prev,
         profilePicture: data.profilePicture
       }));
+      
+      // Also update image preview with the Cloudinary URL
+      setImagePreview(data.profilePicture);
+      
+      // Clear the selected file
+      setProfileImage(null);
       
       alert('Profile picture updated successfully!');
     } catch (error) {
@@ -157,7 +178,7 @@ const ProfilePage = () => {
                     
                     {profileImage && (
                       <button 
-                        className="mt-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+                        className="mt-2 px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 disabled:opacity-50"
                         onClick={handleUpload}
                         disabled={uploading}
                       >
