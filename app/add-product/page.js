@@ -22,6 +22,34 @@ export default function AddProductPage() {
     tags: ''
   });
 
+  // Product verticals/categories
+  const productCategories = [
+    {
+      name: "Housekeeping Materials",
+      examples: "Broom, Phenyl, Hand wash, Floor duster, etc."
+    },
+    {
+      name: "Office Stationeries",
+      examples: "Pen, Pencil, Diary, File, Folder, Envelope, Marker, etc."
+    },
+    {
+      name: "Pantry/Grocery Materials",
+      examples: "Tea, Coffee, Sugar, Dairy whitener, etc."
+    },
+    {
+      name: "IT Accessories",
+      examples: "Mouse, Keyboard, Hard disk, Pen drive, etc."
+    },
+    {
+      name: "Packaging Materials",
+      examples: "Brown Tape, Strip Roll, Shrink Roll, etc."
+    },
+    {
+      name: "COVID Items",
+      examples: "Sanitizer, Disinfectant, Gloves, Mask, Hypochlorite, etc."
+    }
+  ];
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -181,14 +209,25 @@ export default function AddProductPage() {
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                    <input
-                      type="text"
+                    <select
                       name="category"
                       className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
                       value={formData.category}
                       onChange={handleChange}
                       required
-                    />
+                    >
+                      <option value="">Select a category</option>
+                      {productCategories.map((category, index) => (
+                        <option key={index} value={category.name}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                    {formData.category && (
+                      <p className="mt-1 text-xs text-gray-500">
+                        Examples: {productCategories.find(cat => cat.name === formData.category)?.examples}
+                      </p>
+                    )}
                   </div>
                 </div>
                 
