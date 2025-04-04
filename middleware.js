@@ -9,7 +9,8 @@ export function middleware(request) {
     '/cart',
     '/checkout',
     '/profile',
-    '/add-product'
+    '/add-product',
+    '/main'
   ];
   
   const path = request.nextUrl.pathname;
@@ -22,7 +23,8 @@ export function middleware(request) {
   }
   
   // Public paths that should redirect to dashboard if user is logged in
-  const publicAuthPaths = ['/Login', '/Register'];
+  // Remove /Login and /Register from this condition
+  const publicAuthPaths = [];
   
   if (publicAuthPaths.includes(path) && userId) {
     return NextResponse.redirect(new URL('/products', request.url));
@@ -37,6 +39,7 @@ export const config = {
     '/checkout',
     '/profile',
     '/add-product',
+    '/main',
     '/Login',
     '/Register'
   ],
