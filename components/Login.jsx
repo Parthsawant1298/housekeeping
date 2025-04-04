@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+
 
 const Input = ({ label, type, placeholder, value, onChange, error }) => (
     <div className="w-full">
@@ -102,7 +101,7 @@ export default function LoginPage() {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Header />
+          
             
             <section className="flex-grow relative py-12 md:py-20 bg-gradient-to-br from-teal-50 via-gray-50 to-white">
                 <div className="absolute inset-0 z-0 overflow-hidden opacity-20">
@@ -197,7 +196,7 @@ export default function LoginPage() {
                 </div>
             </section>
             
-            <Footer />
+           
         </div>
     );
 }

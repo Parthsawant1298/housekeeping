@@ -2,8 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+
 import { Package, Shield, Truck } from 'lucide-react';
 
 const Input = ({ label, type, placeholder, value, onChange, error }) => (
@@ -135,7 +134,7 @@ export default function RegisterPage() {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Header />
+           
             
             <section className="flex-grow relative py-12 bg-gradient-to-br from-teal-50 via-gray-50 to-white">
                 <div className="absolute inset-0 z-0 overflow-hidden opacity-20">
@@ -305,7 +304,7 @@ export default function RegisterPage() {
                 </div>
             </section>
             
-            <Footer />
+           
         </div>
     );
 }

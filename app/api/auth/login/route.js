@@ -1,5 +1,6 @@
 // app/api/auth/login/route.js
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import connectDB from '@/lib/mongodb';
 import User from '@/models/user';
 
@@ -41,17 +42,27 @@ export async function POST(request) {
         user.lastLogin = new Date();
         await user.save({ validateBeforeSave: false });
 
+        // Fix: Await cookies() before using set()
+        const cookieStore = await cookies();
+        cookieStore.set({
+            name: 'userId',
+            value: user._id.toString(),
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+            path: '/',
+            sameSite: 'strict'
+        });
+
         // Create session data (without sensitive info)
         const userData = {
             id: user._id,
             name: user.name,
             email: user.email,
             role: user.role,
+            profilePicture: user.profilePicture,
             companyName: user.companyName
         };
-
-        // You can add session management here if needed
-        // For example, storing session in a cookie
 
         return NextResponse.json({
             success: true,

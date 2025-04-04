@@ -1,4 +1,4 @@
-import Headerpage from '@/components/Header';
+import Headerpage from '@/components/Navbar';
 import Heropage from '@/components/Hero';
 import Statspage from '@/components/Stats';
 import Whychoosepage from '@/components/Whychoose';
