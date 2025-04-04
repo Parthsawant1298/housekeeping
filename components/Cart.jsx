@@ -125,11 +125,11 @@ export default function CartPage() {
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-gray-50 to-white py-8">
       <div className="container mx-auto px-4">
         <button 
-          onClick={() => router.push('/products')}
+          onClick={() => router.push('/main')}
           className="mb-6 flex items-center text-teal-600 hover:text-teal-800 transition-colors"
         >
           <ArrowLeft size={18} className="mr-1" />
-          <span>Continue Shopping</span>
+          <span>Back</span>
         </button>
         
         <div className="bg-white rounded-xl shadow-lg overflow-hidden p-6">
@@ -279,10 +279,10 @@ export default function CartPage() {
                     Proceed to Checkout
                   </button>
                   <button 
-                    onClick={() => router.push('/main')}
+                    onClick={() => router.push('/products')}
                     className="py-3 px-6 border border-teal-600 text-teal-600 rounded-md hover:bg-teal-50"
                   >
-                    Back
+                    Continue Shopping
                   </button>
                 </div>
               </div>
